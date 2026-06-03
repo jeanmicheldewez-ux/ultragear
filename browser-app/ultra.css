@@ -1,0 +1,1481 @@
+
+ 
+       .not-active{
+         user-select: none; // chrome and Opera
+      }
+ 
+::selection {
+    background-color: transparent !important;
+}
+
+ 
+::-moz-selection {
+    background-color: transparent !important;
+}
+
+/* Garder la flèche de la souris lors du survol */
+* {
+    cursor: default;
+}
+
+/* Changer le curseur lors du survol */
+:hover {
+    cursor: pointer;
+}
+
+ 
+	body 
+	{
+		font-family: Consolas, monospace;
+		font-size: 20px;
+		color: white;
+		background-color: black;
+		width:100%;
+		height:100%;
+
+	}
+	
+*:not([class]) {
+    /* background: linear-gradient(to bottom right, rgba(170, 170, 170, 0.5), rgba(119, 119, 119, 0.5)); */
+    /* border-radius: 8px; */
+}
+
+
+  .transparent-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(055, 255, 255, 0.00); /* Mostly transparent white background */
+            z-index: 9999999; /* High z-index to ensure it is above other elements */
+            pointer-events: none; /* Allow mouse events to pass through */
+        }
+
+
+	
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background-color: orange;
+      border: 2px solid white;
+      border-radius: 50%;
+      mix-blend-mode: difference; /* Pour que le blanc apparaisse bien sur toutes les couleurs */
+      pointer-events: none; /* Le curseur personnalisé ne doit pas interférer avec les clics */
+      transform: translate(-50%, -50%); /* Centre le curseur sur le pointeur de la souris */
+      transition: transform 0.2s ease-out; /* Ajoute une transition pour une animation douce */
+	   z-index: 88000;
+	   
+	}
+
+    /* Ajoutez des classes spécifiques pour changer l'apparence en fonction de l'état du curseur */
+    .custom-cursor:hover {
+      transform: translate(-50%, -50%) scale(1.5); /* Par exemple, agrandit le curseur au survol */
+    }	
+		
+		
+	#fileInput {
+  display: none;
+}
+
+.custom-file-upload {
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  font-size: 16px;
+}
+
+.custom-file-upload:hover {
+  background-color: #45a049;
+}	
+		
+		
+	.ultra
+	{
+
+	  font-size:25px;
+	  font-weight: bold;
+	}
+	
+	.selek
+	{
+	  background-color:#151515;
+	  color:#ff3005;	
+	  font-size:20px;	
+	  outline:none;
+	  border-radius:6px;
+	}
+	
+  selek:hover option:checked {
+  background-color: #FF4400; /* Couleur orange */
+  color: #000; /* Couleur du texte (optionnelle) */
+}
+	
+.btt1 {
+  display: inline-block;  
+  
+  color: #fff; /* Couleur du texte */
+  background-color: #777; /* Couleur de fond grise par défaut */
+  transition: background-color 0.3s ease; /* Ajouter une transition pour un changement en douceur */
+  border-radius:8px;
+  padding:2px;
+  font-weight:bold;
+  
+   margin: 0 10px; 
+   margin-top:2px;
+}
+
+.btt1:hover {
+  background-color:#FF4400; /* Couleur de fond jaune au survol */
+   
+}
+
+.btt2 {
+  background-color: #BBB;
+  }
+  
+  .btt4:hover {
+  color:#F40; /* Couleur de fond jaune au survol */
+   
+}
+
+
+.field1 {
+  display: inline-block; /* Aligner les divs horizontalement */
+  margin: 0 10px; /* Ajouter de la marge entre les divs */
+  color: #333; /* Couleur du texte */
+  background-color: #888; /* Couleur de fond grise par défaut */
+  transition: background-color 0.5s ease; /* Ajouter une transition pour un changement en douceur */
+  border-radius:8px;
+  padding:0px;
+  font-size:18px;
+	font-weight: bold;
+	  outline: none;
+	   autocomplete="off" required>
+}
+
+
+
+.field1:hover {
+  background-color:#BBB; /* Couleur de fond jaune au survol */
+   
+}
+
+.barman
+{
+
+padding:6px;
+
+}
+.reltx
+ {
+  display: flex;
+  flex-wrap: wrap; /* Wrap elements if they overflow the container */
+  justify-content: space-around; /* Distribute elements evenly with spacing */
+}
+ 
+.balle {
+    position:relative;
+   
+}
+
+ 
+.ccmon {
+    position:absolute;
+	
+	bottom:0%;
+	left:0;
+	width:100%;
+	height:80%;
+	border-radius:4px;
+	background:lightGreen;
+	opacity:0.62;
+   mix-blend-mode: difference;
+}
+
+
+.underbend {
+    position:absolute;
+	
+	
+	bottom: 50%;
+	left:0;
+	width:100%;
+	height:0%;
+	border-radius:6px;
+	background:gold;
+	opacity:0.82;
+      mix-blend-mode: exclusion; 
+   
+}
+
+ 
+.ball {
+  position: relative; /* Can be optional */
+  background: #FFF;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+  border: 5px solid #888;
+  border-radius: 12px;
+  /* display: block;   */
+  /* width: 94px;     */
+  /* height: 64px;     */
+  overflow: hidden;
+  user-select: none;
+  clear: both;   /* Clear any floating elements before */
+  
+
+}
+
+.undercc
+{
+	
+	position: relative;
+	z-index:20;
+}
+
+
+.bartran
+{
+
+	    /* display:none;   */
+   z-index :-8888;
+ display:block;
+	   position:absolute;  
+    background:gold;	   
+	bottom:0;
+	left:-20px;
+	width:4px;
+	height:100%;
+}
+
+
+.barloop
+{
+	   z-index :-8988;
+ display:none;
+	   position:absolute;  
+      
+	bottom:0;
+	left:120px;
+	width:300px;
+	height:100%;
+	
+    background: linear-gradient(to bottom right, rgba(255, 10, 0, 0.2), rgba(235, 0, 10, 0.15)); /* Transparent red gradient */
+    border-left: 2px solid rgba(255, 192, 203, 0.5); /* Light pink left border with 0.7 opacity */
+    border-right: 2px solid rgba(255, 192, 203, 0.5); /* Light pink right border with 0.7 opacity */
+
+}
+
+
+.canv
+{
+
+	  /* display:none;  */
+     z-index :- 9999;
+     display:block;
+	 position:absolute;   
+	bottom:0;
+	left:0;
+	width:calc(100% - 2px);
+	height:100%;
+	opacity:0.85;
+
+}
+
+.ball3
+{
+display: inline-block;
+  background: #000;
+  color:white;
+  font-weight:bold;
+  font-size:16px;
+  padding:4px;
+  padding-left:4px; 
+  padding-right:4px; 
+  margin-left:3px; 
+  margin-right:3px;
+  
+  border: 3px solid #FFffff;
+  border-radius:5px;
+
+  /*background: linear-gradient(to bottom, #ff4400 40%, orange 6%);*/
+  
+   user-select: none;
+
+}
+
+
+.ball4
+{
+  display: inline-block;
+  background: #000;
+  color:white;
+  font-weight:bold;
+  font-size:15px;
+  padding:4px;
+  padding-left:4px; 
+  padding-right:4px; 
+  margin-left:8px; 
+  margin-right:4px;
+  
+  border: 3px solid #FFffff;
+  border-radius:5px;
+
+   background: linear-gradient(to bottom, #ff4400 40%, orange 60%); 
+  
+   user-select: none;
+
+}
+
+	
+  .v-bar 
+  {
+  width: 200px;
+  height: calc(100% - 56px);
+  overflow: auto;
+  background-color: #222;
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
+  }
+
+.v-bar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.v-bar::-webkit-scrollbar-thumb {
+  background-color: black;
+}
+
+ 
+::-webkit-scrollbar {
+  width: 12px; /* Largeur de la barre de défilement */
+   height: 12px;
+  background-color: #000; /* Fond noir */
+}
+
+ 
+::-webkit-scrollbar-button:start {
+  background-color: #FF4400; /* Couleur orange pour le bouton */
+}
+
+ 
+::-webkit-scrollbar-button:end {
+  background-color: #FF4400; /* Couleur orange pour le bouton */
+}
+
+ 
+::-webkit-scrollbar-track {
+  background-color: #000; /* Fond noir */
+}
+
+/* Styles pour la poignée de défilement (thumb) */
+::-webkit-scrollbar-thumb {
+  background-color: #FF4400; /* Couleur orange pour la poignée */
+}
+
+/* Styles pour la poignée de défilement au survol */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #FF4400; /* Couleur orange plus claire au survol */
+}
+
+.skal
+{
+
+	 display: inline-block;
+    margin: 10px;
+	background-color: #Fdb;
+	color: #FF4400;
+	border-radius:4px;
+	padding:2px;	
+	padding:4px;
+
+}
+
+
+/* Target the entire slider track */
+.orange-slider {
+  -webkit-appearance: none;
+  width: 30%;
+  height: 10px;
+  border-radius: 5px;
+  background: rgba(255, 68, 0, 0.69); 
+  outline: none;
+}
+
+/* Target the slider thumb/button */
+.orange-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Remove default styles for Firefox */
+.orange-slider::-moz-range-thumb {
+  width: 15px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Remove default styles for Edge */
+.orange-slider::-ms-thumb {
+  width: 15px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* Remove default outline for all browsers */
+.orange-slider:focus {
+  outline: none;
+}
+
+
+    .main-container {
+      display: flex;
+      flex-direction: line;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .element {
+      width: 30px;
+      height: 30px;
+	  border-radius:8px;
+      background-color: orange;
+      margin-right: 10px;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .checkbox {
+      margin-right: 10px;
+    }
+
+    .numeric-input {
+      width: 40px;
+    }
+	
+	input[type='number']{
+    width: 52px;
+	
+} 
+
+#cont{
+padding:0px;
+width:100%;
+
+left:0px;
+}
+
+
+        #consoleOutput {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            max-height: 75%;
+			font-size:12px;
+            width: 100%;
+            overflow-y: auto; /* Enable vertical scrolling if content exceeds the height */
+            background-color: #000; 
+			color:white;
+            padding: 10px;  
+        }
+
+.outline-text {
+    color: black; /* Set the color of the text */
+    text-shadow: 
+        -1px -1px 0 #FF9550,  
+         1px -1px 0 #FF5510,
+        -1px  1px 0 #FF5510,
+         1px  1px 0 #FF5510;  
+		 
+   user-select: none; /* Prevent text selection */
+    cursor: default; /* Set cursor to default */
+ 
+    pointer-events: auto;
+}
+
+.radio
+{
+
+	width:35px;
+	height:35px;
+	
+	color:orange;
+	
+}
+
+
+.bar
+{
+	 background: repeating-radial-gradient(
+	  circle,
+	  #FF4400,
+	  #FF4400 10px,
+	  #dd66dd 10px,
+	  #d86d00 20px
+	);
+	opacity:0.0;
+}
+
+
+.num
+{
+	
+	font-weight:bold;
+	color:#FF4400;
+	font-size:17px;
+	background:none;
+	border:none;
+	outline:none;
+	
+	
+}
+
+
+
+/* //////////// */
+/* *************************************************** */
+/* ***************************************************** */
+
+
+/* html, body { */
+    /* margin: 0; */
+    /* padding: 0; */
+    /* width: 100%; */
+/* } */
+
+/* * { */
+    /* box-sizing: border-box; */
+/* } */
+ 
+#installBtn
+{
+
+    background:white;
+    color:#FF4400;
+
+}
+ 
+ .listitem
+ {
+    background:black;
+    color:#FF4400;
+
+ }
+  .listitem:hover
+ {
+    background:#252525;
+    color:#FF4400;
+
+ }
+ 
+hr {
+  border: 0;              /* Removes the default border */
+  height: 1px;            /* Sets the height of the line */
+  background-color: #FF4400; /* Sets the color to orange */
+}
+ 
+
+  .flipped-video {
+    transform: scaleX(-1);
+  }
+  
+    
+  #zz
+  {
+
+  
+  }
+  
+  
+  .container
+  {
+  
+      position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  
+  }
+  
+
+  #soundbar {
+    display: inline-block;  
+    color: #111; /* Text color */
+    
+ 
+    border-radius: 8px;
+    padding: 2px;
+    /* margin: 0 10px;  */
+    margin-top: 4px;   
+  }
+
+/*.btt1:hover {
+  background-color:#AA3;  Couleur de fond jaune au survol 
+   
+}*/
+
+.btx
+{
+
+display: inline-block; padding: 5px 10px; 
+margin: 5px; background-color: #ff4400; color: white; cursor: pointer; 
+ 
+
+}
+
+.box1
+{
+outline:none;
+}
+
+.check 
+{
+ 
+  BACKGROUND:#888;
+  color:white;
+  display: inline-block; 
+ padding-left:5px;
+ padding-right:5px;
+ 
+ border-radius:5px;
+ 
+   cursor: pointer;
+   margin-top:4px;
+   margin-left:4px;
+}
+
+.check:hover
+{
+ 
+  BACKGROUND:#777;
+  
+ }
+
+  table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    td {
+      border: 0px solid #ddd;
+      position: relative; /* This makes the td a positioning context */
+    }
+    .levelline {
+ 
+      position: absolute;
+      height: 4px;
+  border:solid  linear-gradient(135deg, #3a3a3a 0%, #8c8cac 50%, #c0c0c0 100%) 1px;
+      background:#0078D4;
+      width: 95%; /* Width of the bar as a percentage of the parent td */
+      top: 50%; /* Center the bar vertically within the td */
+      left: 0; /* Align the bar to the left */
+      transform: translateY(-50%); /* Adjust the vertical alignment */
+    }
+
+ 
+::-webkit-scrollbar {
+    width: 10px;
+height:10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(15, 15, 15, 1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #FF4400;
+    border-radius: 10px;
+    border: 3px solid rgba( 255, 68, 0, 1);
+
+}
+ 
+.btnPlus {
+    position: fixed;  /* Places it at the bottom of the content */
+    bottom: -8px;  /* Stick to the bottom of the parent */
+    left: 14px;  /* Center it */
+    transform: translateX(-50%);  /* Center correction */
+    
+    display: inline-block;
+    padding: 4px 4px;
+    font-weight: bold;
+    font-size: 25px;
+    color: white;
+    border: solid #FF4400 2px;
+    background: #FF4400;
+    border-radius: 0% 50% 0% 0%;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1;
+    margin-bottom: 10px; /* Some space from bottom */
+}
+
+
+
+ .mytracks {
+    position: fixed;
+    left:0px;
+    top: 40px;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    max-height: calc(100% - 45px); /* Adjust height to fit */
+    overflow-x: hidden; /* Enable horizontal scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
+    display: flex; /* Flexbox for layout */
+    flex-direction: column; /* Stacks children vertically */
+    align-items: center; /* Center-aligns children */
+    background: #111; /* Background color */
+    padding-bottom:100px; /* Prevents last element from being hidden */
+ /* background:red; */
+ 
+
+}
+
+
+
+
+
+/* .mytracks { */
+    /* position: fixed; */
+    /* left: 0; */
+    /* top: 5px; */
+    /* right: 0; /* Fix this */ */
+    /* bottom: 0; /* Fix this */ */
+    /* max-width: 100%; */
+
+    /* max-height: calc(100% - 45px);   */
+    /* overflow-x: auto; */
+    /* overflow-y: auto; */
+ 
+/* } */
+
+/* #mytracks { */
+    /* width: calc(100% - 2px); */
+    /* min-height: 100vh; /* Ensures it grows */ */
+    /* position: relative; /* Makes `.btnPlus` position correctly */ */
+    /* overflow-y: auto; /* Enables scrolling */ */
+    /* display: flex; */
+    /* flex-direction: column; */
+    /* align-items: center; */
+    /* background: #111; */
+    /* padding-bottom: 80px; /* Prevents last element from being hidden */ */
+/* max-height: calc( 100% - 150px ); */
+/* } */
+
+
+
+
+
+.target {
+  border: 0px solid #FF4400;
+  border-radius: 2px;
+  padding-inline:8px; 
+  margin-bottom:5px;
+  margin-top:15px;
+  margin-right:8px;
+  position: relative; /* Needed for absolute positioning of children */
+  overflow: visible; /* Allow label to overflow */
+  /* border:solid red 33px; */
+}
+
+. -label {
+  position: absolute;
+  top: -15px; /* Move up outside the container */
+  left: 0;
+  width: 100%;
+  
+  margin-left:2px;
+  margin-right:2px;  
+ 
+  font-size: 10px;
+  color:#FFF;
+  text-shadow:  2px 2px 2px #000000;
+  text-align: center;
+  pointer-events: none; 
+  
+}
+
+.target-synth {
+  position: absolute;
+  top: -40px; /* Move up outside the container */
+  left: 10px;
+  width: 100%;
+color:#111;
+font-weight:bold;
+/* background:black; */
+font-size:15px;
+width:auto;
+ 
+height:auto;
+text-shadow:  2px 2px 2px #eee;
+}
+
+
+.target-label
+{
+
+position:absolute;
+ 
+top:0px;
+color:#111;
+font-weight:bold;
+/* background:black; */
+font-size:15px;
+width:auto;
+/* max-width:100%; */
+/* max-width:57px; */
+/* height:17px; */
+/* overflow:hidden; */
+/* margin-left:-15px; */
+
+height:auto;
+text-shadow:  2px 2px 2px #eee;
+
+}
+
+.target-label2
+{
+
+position:absolute;
+ 
+top:0px;
+color:#111;
+font-weight:bold;
+/* background:black; */
+font-size:15px;
+width:auto;
+/* max-width:100%; */
+max-width:50px;
+height:17px;
+overflow:hidden;
+/* margin-left:-15px; */
+
+height:auto;
+text-shadow:  2px 2px 2px #eee;
+
+}
+ 
+
+.targetVol
+{
+border: 0px solid #FF4400; 
+border-radius: 5px;    
+overflow: hidden;  
+margin-left:24px;
+margin-right:5px;
+margin-top:10px;
+min-width:15px;
+}
+
+
+.numTrack
+{
+position:absolute;
+top:5px; left:22px;
+/* width:15px; */
+color:white;
+background:#FF4400;
+font-size:16px;
+padding:0px 4px;
+margin-top:0px;
+border: 2px solid #FF4400; 
+border-radius: 5px;    
+overflow: hidden;  
+}
+
+#mysplash
+{
+
+position:fixed; top:0; left:0;
+   z-index:99125;
+  display: block;
+  color:white;
+  width:100%; height:100%; background:black;
+  background-repeat: no-repeat;
+    background-attachment: fixed;
+ background-image: url('alienlogo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+
+#menuSynth {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba( 90,90,90,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#menuFX {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba( 90,90,90,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menutone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding:30px;
+  border-radius:15px;
+  background:black;
+  max-height:calc(100% - 150px);
+    overflow-x:hidden;  
+    overflow-y:auto;
+}
+
+.menutoneitem {
+
+   font-weight:normal;
+   font-size:18px;
+  padding:6px;
+  color: #FF4400;
+  background-color: #333;
+  border-radius: 4px;
+  margin: 5px 0;
+  transition: background-color 0.3s ease;
+}
+
+.menutoneitem:hover {
+  background-color: #555;
+}
+
+#plustrack
+{
+
+z-index:90;
+
+}
+
+
+.piano
+{
+
+position:fixed;
+left:0px;
+bottom:0;
+width:calc(100% - 24px);
+width:100%;
+height:110px;
+padding:0;
+padding-top:5px;
+padding-bottom:5px;
+text-align:center;
+display:none;
+
+z-index:80;
+
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+  pointer-events: auto;
+}
+
+#piano.hidden {
+  opacity: 1;
+  pointer-events: none;
+  transition: opacity 1.5s ease-in-out;
+}
+
+.onetrack {
+    /* min-width: 100%; */
+    /* max-width: 100%; */
+width:100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    background: linear-gradient(135deg, #3a3a3a 0%, #8c8cac 50%, #c0c0c0 100%);
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 10px;
+
+min-height: 172px;   /* Prevents shrinking */
+    max-height: 172px; 
+padding-right:40px;
+    height:172px;
+}
+
+.trackosc
+{
+display: flex;
+    align-items: center;
+    position: relative;
+    height: 100%;
+
+   gap: 8px; 
+  /* flex-wrap: wrap; /* Allows wrapping if elements exceed container width */ 
+  margin-right:6px;
+  
+}
+
+
+.btnPlusTone {
+    position: absolute;  
+    right: 0px;  
+    bottom: 0px;  
+    padding: 4px 8px;
+    font-weight: bold;
+    font-size: 25px;
+    color: white;
+    border: solid #FF4400 2px;
+    background: #FF4400;
+    border-radius: 20px 0px 0px 0px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 1;
+    z-index: 10;
+
+}
+
+ 
+ 
+.btnChangeTone {
+    position: absolute;  
+    right: 0px;  
+    top: 0px;  
+    padding: 4px 8px;
+padding-bottom:6px;
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    border: solid #FF4400 2px;
+    background: #FF4400;
+    border-radius: 0px 0px 0px 20px; 
+    cursor: pointer;
+    text-align: center;
+    line-height: 1;
+    z-index: 10;
+} 
+
+ 
+
+
+.font40 {
+   
+font-size:40px;
+}  
+
+
+.myFX {
+ 
+    display: inline-grid;
+  /* display: grid; /* Use block-level grid */ */
+
+    grid-template-columns: repeat(auto-fill, 50px);
+    grid-template-rows: repeat(2, 50px);
+    grid-auto-flow: column;
+    gap: 4px;
+    padding: 5px;
+padding-left:5px;
+  padding-right:5px; 
+   
+    max-height: 110px;
+
+    min-width: min-content;
+    width: auto;
+
+  /* min-width: 0 !important; /* Disable content-based min-width */ */
+  /* width: 100%; /* Allow explicit width control */ */
+
+margin-left:5px;
+margin-right:5px;
+text-align:center;
+border-radius:5px;
+
+/* justify-content: center; */
+    /* align-items: center; */
+}
+
+.labelfx
+{
+
+position:absolute;
+ 
+top:0px;
+ 
+color:#111;
+font-weight:bold;
+/* background:black; */
+font-size:15px;
+width:auto;
+max-width:90px;
+overflow:hidden;
+height:17px;
+margin-left:-15px;
+height:auto;
+text-shadow:  2px 2px 2px #eee;
+
+}
+
+
+
+.labelfx2
+{
+
+position:absolute;
+ 
+top:0px;
+
+color:#FF4400;
+font-weight:bold;
+/* background:black; */
+font-size:18px;
+width:auto;
+margin-left:15px;
+height:auto;
+/* text-shadow:  2px 2px 2px #eee; */
+
+}
+.fx {
+    /* width: 50px; */
+    /* height: 50px; */
+    /* border: solid white 0px; */
+text-align:center;
+}
+
+
+
+
+.fx-label {
+/* font-family: "Helvetica Narrow"; */
+  position: relative;
+  top: -2px; /* Move up outside the container */
+  left: -8px;
+  width: calc(100% + 8px);
+  overflow:hidden;
+  text-shadow:  2px 2px 2px #000000;
+    
+  
+  border-radius:4px;
+  font-size: 10px;
+  color:#FFF;
+  text-align: center;
+  pointer-events: none; /* Optional: prevent label from blocking interactions */
+}
+
+.btRemove
+{   position:relative;
+top:113px;
+ left:-15px;
+height:12px;
+width:12px;
+font-size:12px;
+padding:1px 1px;
+color:black;
+/* background:#FF4400; */
+font-weight:bold;
+border:solid black 2px;
+border-radius:5px;
+
+}
+
+.btRemove:hover
+{ 
+background:red;
+}
+
+.osc
+{
+
+position:absolute;
+left:4px;
+bottom:0;
+
+margin-bottom:4px;
+ 
+padding-left:4px;
+
+}
+.alignedH
+{
+  display: flex;
+
+  gap: 8px; 
+}
+
+
+.XYarea
+{
+display:block; 
+margin-top:8px;
+/* width:120px; */
+/* height:120px; */
+/* background:grey; */
+border-radius:12px;
+}
+
+
+
+
+
+/* Style for Chrome, Safari, Edge, and Opera */
+input[type="range"] {
+  -webkit-appearance: none; /* Remove default styling */
+ // width: 300px; /* Adjust width */
+  height: 8px; /* Height of the slider track */
+  background: #551500; /* Grey track color */
+  border-radius: 5px; /* Rounded track edges */
+  outline: none; /* Remove outline */
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 15px; /* Width of thumb */
+  height: 20px; /* Height of thumb */
+  background: #ff4400; /* Thumb color */
+  border-radius: 20%; /* Make thumb circular */
+  cursor: pointer;
+}
+
+/* Style for Firefox */
+input[type="range"]::-moz-range-thumb {
+  width: 15px;
+  height: 20px;
+  background: #ff4400;
+  border-radius:20%;
+  cursor: pointer;
+}
+
+input[type="range"]::-moz-range-track {
+  background: #551500;
+}
+
+/* Style for Internet Explorer */
+input[type="range"]::-ms-thumb {
+  width: 15px;
+  height: 20px;
+  background: #ff4400;
+  border-radius: 20%;
+}
+
+input[type="range"]::-ms-track {
+  background:#551500;
+}
+
+
+ 
+select {
+  appearance: none; /* Remove default browser styling */
+  background-color: black; /* Black background */
+  color: #ff4400; /* Font color */
+  border: 1px solid #ff4400; /* Border color matching the arrow */
+  border-radius: 2px; /* Rounded corners */
+ 
+  padding-left:3px;
+  padding-right:3px;
+ 
+}
+
+ 
+select::after {
+  content: "▼"; /* Unicode for a downward arrow */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff4400; /* Arrow color */
+}
+
+/* Wrapper to position the select and pseudo-element correctly */
+.select-wrapper {
+  position: relative;
+}
+
+ 
+
+
+/* Styling for numeric input */
+input[type="number"] {
+  background-color: black; /* Black background */
+  color: #ff4400; /* Font color */
+  border: 1px solid #ff4400; /* Border color */
+  border-radius: 2px; /* Rounded corners */
+  padding-left: 3px;
+  padding-right: 3px;
+  font-size: 16px;
+}
+
+/* Styling for spinner arrows in WebKit browsers (Chrome, Safari, Edge, Opera) */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  appearance: auto; /* Keep the spinner visible */
+  background-color: black; /* Black background for arrows */
+  color: #ff4400; /* Arrow color */
+}
+
+/* Remove default spinner appearance in Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; /* Remove default spinner appearance in Firefox */
+}
+
+
+/* Styling for checkboxes */
+input[type="checkbox"] {
+  appearance: none; /* Remove default browser styling */
+  width: 20px; /* Set width of checkbox */
+  height: 20px; /* Set height of checkbox */
+  background-color: black; /* Black background */
+  border: 1px solid #ff4400; /* Border color */
+  border-radius: 4px; /* Rounded corners for checkbox */
+}
+
+input[type="checkbox"]:checked {
+  background-color: #ff4400; /* Background color when checked */
+}
+
+input[type="checkbox"]:checked::before {
+  /* content: "✔"; /* Checkmark symbol when checked */ */
+  color: black; /* Checkmark color */
+  /* font-size: 16px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top:5px;
+}
+
+/* Wrapper for select (unchanged) */
+.select-wrapper {
+  position: relative;
+}
+
+select {
+  appearance: none; /* Remove default browser styling */
+  background-color: black; /* Black background */
+  color: #ff4400; /* Font color */
+  border: 1px solid #ff4400; /* Border color matching the arrow */
+  border-radius: 2px; /* Rounded corners */
+
+  padding-left:3px;
+  padding-right:3px;
+}
+
+select::after {
+  content: "▼"; /* Unicode for a downward arrow */
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ff4400; /* Arrow color */
+}
+
+input[type="text"] {
+  color: #FF4400; /* Text color */
+  background-color: #000000; /* Background color */
+}
+
+#extra1
+{
+	
+	width:100%;
+	max-height:80px;
+	overflow-x:hidden;
+	overflow-y:auto;
+	
+	
+}
+
+.mysample
+{
+	position:absolute;
+	left:215px;
+	bottom:38px;
+	
+	color:white;
+	background: #ff4400;
+	border-radius: 4px;
+	padding-left:5px;
+	padding-right:5px;	
+	
+}
+
+.contspl {
+  position: absolute;
+  left: 215px;
+  bottom: 2px;
+  font-size: 16px;
+  color: white;
+  background: #888;
+  border-radius: 6px;
+  padding: 3px;
+  border: solid #ff4400 2px;
+}
+
+.minispl {
+  display: inline-block;     /* ← This makes width work */
+  width: 20px;
+  height: 20px;              /* optional: fixed height too */
+  text-align: center;
+  line-height: 20px;         /* vertically centers text */
+  background: #444;
+  margin: 0  1.5px;
+  border-radius: 3px;        /* nice rounded corners */
+}
+
+
+
+
+.buttsample
+{
+ 
+	display: inline-block;
+	color:white;
+	background: #ff4400;
+	border-radius: 4px;
+	padding-left:5px;
+	padding-right:5px;	
+	  padding: 2px 5px;
+  cursor: pointer;
+  margin-left:10px;
+	
+}
+
+.valu
+{
+ 
+	position:absolute;
+	left:22px;
+	bottom:1px;
+	font-size:12px;
+	color:white;
+	background:rgba(0, 0, 0, 0.4);
+	border-radius:0px 4px 0px 0px;
+	padding-left:0px;
+	padding-right:0px;	
+	font-weight:normal;
+}

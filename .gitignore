@@ -1,0 +1,31 @@
+# Generated and dependency folders
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets and local environment
+.env
+.env.*
+secrets.*
+credentials.*
+
+# Firmware build outputs
+*.bin
+*.elf
+*.map
+*.hex
+*.uf2
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

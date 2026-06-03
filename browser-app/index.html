@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ultragear ESP32 MIDI Controller</title>
+	
+	
+		<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="pragma" content="no-cache">
+	
+	<!-- <script> -->
+	<!-- if (window.location.protocol === "https:") { -->
+    <!-- const httpUrl = "http://" + window.location.host + window.location.pathname + window.location.search; -->
+    <!-- window.location.replace(httpUrl); // Try to redirect -->
+	<!-- } -->
+	<!-- </script> -->
+   
+  
+  
+	<!-- href="raz.ico" -->
+	
+	<meta http-equiv="Permissions-Policy" content="midi=*">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   
+   	<meta name="robots" content="index, follow">
+ 
+
+ <link rel="icon" href="favicon2.ico"  type="image/x-icon">
+ 
+     <link rel="stylesheet" href="ultra.css">
+	 	<script src="nexusUI.js"></script>
+ 
+	<link rel="manifest" href="manifest.json">
+
+ 
+</head>
+<body>
+
+<div class="transparent-overlay" id="uplayer" 
+style="position:fixed; top:0; left:0; width:100%; height:100%;
+  color:#ff3005;	 "> 
+  
+  <div id="bar1" class="bar" style="position:absolute; bottom:70px; right:120px; 
+height:20%;  width:15%;  "></div>
+  
+  </div>
+  
+  
+<div class="ultra"   id="cm" 
+style="position:fixed; bottom:2px; right:8px; 
+  color:#ff3005;	display:none;">-.-
+  </div>
+
+<div class="ultra" id="cm" 
+style="position:fixed; bottom:2px; right:8px; 
+  color:#ff3005;	display:none;">-.-
+  </div>
+ 
+<div style="position: fixed; width: 100%; background: #444; left:0px; top:0px;">
+  <button id="menu" style="float: left; font-size: 25px; z-index: 4; color:#FF7700; 
+  border:solid #FF7700 2px;">&#9776;</button>
+  <span id="grxall" style="display:block; ">
+  <!-- <div class="btt1" id="grx1" style="color: #F40; float: left; margin-left: 10px;">GEAR 1</div> -->
+  <!-- <div class="btt1" id="grx2" style="float: left; margin-left: 10px;">GEAR 2</div> -->
+  <!-- <div class="btt1" id="grx3" style="float: left; margin-left: 10px;">GEAR 3</div> -->
+  <!-- <div class="btt1" id="grx4" style="float: left; margin-left: 10px;">GEAR 4</div> -->
+   
+  <span style="margin-left:15px; ">TRACK </span>
+   <!-- onfocusin="this.style.width='60px'"  onfocusout="this.style.width='28px'"  -->
+  <select class="selek" style="margin-top:6px; width:38px;" 
+  onchange="selectTrack(this.value, this.selectedIndex)" id="mytracklist" >
+  <option value="1">1</option><option value="the meme song">2  &nbsp;the meme song</option><option value="3">3</option><option value="4">4</option>
+  <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
+  <option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+  <option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
+ </select>
+
+  &nbsp;<input class="selek" type="text" id="mytrack"
+ onchange="changeTextSelect(this.value);"/>
+ 
+   <div class="btt1 btt3" id="grxm2" style=" " onclick="sendTrack()">SAVE</div>
+   
+   
+   <span style="position:absolute; right:12px; margin-top:6px;" > 
+    BPM <input type="number" class="num" id="mybpm" 
+	 value="120" onchange="newBpm(this.value)" /> 
+   </span>
+  
+  </span>
+ 
+ <div   id="bpm" class="outline-text"  
+ onmousedown="changeBpm();" ondblclick="backBpm()"
+  ontouchstart="changeBpm();" ontouchend="flagbpm = 0;";  
+ style="position: absolute; right: 100px; display:none;
+top: 4px; color:#ff4400; font-size:29px; font-weignt:bold;">120</div>
+ 
+<div class="btt1" id="soundbt" onclick="startsound()"
+ style="position: absolute; right: 10px; 
+top: 4px; color:#EEE; display:none; ">SOUND</div>
+
+ 
+ <span id="grxall-menu" style="display:none; ">
+    <span style="display:none;"> <div class="btt1" id="grxm1" style=" float: left; margin-left: 10px;" onclick="loadTrack()" >LOAD</div>
+  <div class="btt1 btt3" id="grxm2" style="float: left; margin-left: 10px;" onclick="savetrack()">SAVE</div>
+  <div class="btt1 btt3" id="grxm3" style="float: left; margin-left: 10px;" onclick="deletetrack()">DELETE</div>
+
+ &nbsp;<input class="selek" type="text" id="thepatch"
+ onchange="document.getElementById('grxm2').style.background='orange';"/>
+ 
+
+ <span id="jmx" style="display:none; color:#FF4400;">.jmx</span>
+ 
+  <div class="btt1" id="grxm3" style=" display:none;float: left; margin-left:5px;
+">"RANDOM"</div></span>
+ 
+&nbsp;<select class="selek" id="midiDevices" onchange="changedevice2(this.value)" 	
+style="margin-top:7px;" ></select> |  
+
+  <!-- <span id="soundbar"  style="display:block; color:white;" > -->
+	 
+ 
+	
+<select id="mySelect"  class="selek" 
+  onchange="selectSound(this.value,this)" >
+   <option value="" selected disabled hidden>action</option>
+  <option value="load">load</option>
+  <option value="save">save</option>
+  <option value="new">new</option>
+  <option value="delete">delete</option>
+  <option value="share">share</option>
+</select>
+
+    <input type="text" id="soundname" class="selek" style ="border:solid #FF4400 2px; width:20%; " />
+	
+ sound<input type="checkbox" class="" id="soundon"
+     value="checked" onchange="flipSoundOn(this.checked);" style="position:relative; top:8px;" > 	
+   <!-- <span class="check" id="loadsoundbt" onclick="loadSounds()" >load</span>  -->
+   <!-- <span class="check" id="savesoundbt" onclick="saveSounds()" >save</span>   -->
+   <!-- <span class="check" id="loadsoundbt" onclick="newSounds()" >new</span>  -->
+   <!-- <span class="check" id="savesoundbt" onclick="deleteSounds()" >delete</span>     -->
+
+  <!-- </span>  	  -->
+
+ </span>  
+  
+</div>
+
+  
+  
+  <div id="menucontent" style ="position:fixed; width:100%; 
+  height:calc(100% - 40px); top:40px; overflow-y:auto; left:0px;
+  overflow-x:hidden;  
+  background: radial-gradient(circle, rgb(55,55,55), rgb(99,99,99));
+  display:none; z-index:1;" >
+ 
+	<div  class="barman" style="width:100%;  
+	color:#ccc; background:#ddd; display:none;">
+
+
+	<div class = "btt1" id="gr1" style="color:#F40;" >GEAR 1</div> 
+	<div class = "btt1" id="gr2">GEAR 2</div> 
+	<div class = "btt1" id="gr3" >GEAR 3</div> 
+	<div class = "btt1" id="gr4">GEAR 4</div> 	
+	 
+	 
+ 
+	
+	<input id="grc" class = "field1"   type="text"    maxlength="16" 
+	placeholder="GEAR CODE" required>
+
+
+	<div id="sendCode" class="btt1 btt2"
+	style="color:#F11;" id="setgear" onclick="setGear()"> SET </div> 		
+	</div>
+
+
+	<div   class="barman" style="width:100%;  
+	color:#ccc; background:#333; display:none; ">
+
+		<div class = "btt1" id="wifi1" style="color:#F40;" >WIFI 1</div> 
+	<div class = "btt1" id="wifi2">WIFI 2</div> 
+	<input id="wf1" class = "field1"   type="text" id="username" name="username" 
+	maxlength="31" 
+	placeholder="NETWORK" required>
+	<input id="pss1" class = "field1"   type="text" id="username" name="username" 
+	maxlength="31" 
+	placeholder="PASSWORD" required>	
+
+
+	<input id="wf2" class = "field1"   type="text" id="username" name="username" 
+	maxlength="31" 
+	placeholder="NETWORK" required>
+	<input id="pss2" class = "field1"   type="text" id="username" name="username" 
+	maxlength="31" 
+	placeholder="PASSWORD" required>	
+
+	<div id="sendWifi" class="btt1 btt2"
+	style="color:#F11;"> SEND </div> 	
+		
+	</div>
+
+
+	<div   class="barman" style="width:100%;  
+	color:#ccc; background:#444; display:none;">
+	
+	SEND MIDI TO GEAR : <select class="selek" id="route" onchange="sendroute();">
+<option value="0"> &nbsp; - - </option>
+<option value="1">Gear 1</option>
+<option value="2">Gear 2</option>
+<option value="3">Gear 3</option>
+<option value="4">Gear 4</option>
+</select> 	
+
+
+	</div>
+	
+	<div   class="barman" style="width:100%;  
+	color:#ccc; background:#333; display:none;">
+	SEND MIDI : 
+
+	<div id="mididin" class="btt1 btt2" onclick="mididin()"
+	style=" background:#000; color:#fff;">&nbsp;DIN&nbsp;</div> 	 	
+	
+	<div id="midiusb" class="btt1 btt2" onclick="midiusb();"
+	style="background:#000; color:#Fff; ">&nbsp;USB&nbsp;</div>	
+	
+	<span><div id="sdback" class="btt1 btt2" onclick="midibrowser();"
+	style="background:#FF4400; color:#Fff; ">&nbsp;BROWSER&nbsp;</div><span>(virtual channel)</span></span> 
+	
+	</div>
+
+
+	<div   class="barman" style="width:100%;  
+	color:#ccc; background:#333; display:none;">
+
+ 
+	 <select class="selek" id="midiDevices2" style="display:none;"
+ onchange="changedevice(this.value)" 	 ></select> 
+ <!-- <span id="replug" style="display:none;">connect and disconnect Midistream device </span> -->
+	  <!-- <button id="sendMidiButton"  >Send MIDI Message</button> --> 
+		<!-- <div id="sendBoom" class="btt1" onclick="sendStream()" > TEST </div>  -->
+<select class="selek" id="midiDevicesin"
+ style="display:none;" onchange="changedevicein(this.value)" 	 ></select> 
+
+	</div>
+	
+  
+  
+  
+  <!-- *************************************************************** -->
+  <!-- *****************     BEGIN SOUND TAB    ********************** -->
+  <!-- --------------------------------------------------------------- -->
+  
+ <!-- margin-top:7px;  margin-left:7px; margin-right:7px; -->
+<div id="sound" style="display:none; " > 
+ <!-- <div id="allTracks" class="alltracks"> -->
+ <div id="mytracks" class="mytracks" > 
+ </div>
+ <br><span id="plustrack"  class="btnPlus" onclick="flipNewTone(trackCount,0);" >+</span> 
+ <br><br>
+<!-- </div> -->
+ 
+  
+	<div id="menuSynth"   style="display:none;"
+	  onclick="flipNewTone(trackCount,0)" >
+
+		<div class="menutone"> 
+		
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">AMSynth</div>
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">Synth</div> 
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">DuoSynth</div>
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">FMSynth</div>
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">MembraneSynth</div>
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">MetalSynth</div>
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">MonoSynth</div>
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">NoiseSynth</div>
+			<div class="menutoneitem" onclick="selectOsc(this.innerHTML,event);">PluckSynth</div>
+			<div class="menutoneitem" onclick="selectOsc('Player',event);">Looper</div> 
+		</div>
+	 </div>	
+	 
+ 
+
+ <div id="menuFX" style="display:none;" onclick="flipFX(trackCount)">
+    <div class="menutone">
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Filter</div>		
+        <!-- <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">BiquadFilter</div>			 -->
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">AutoFilter</div>	
+
+		
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">FeedbackDelay</div>		
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Reverb</div>	
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">AutoWah</div>
+		
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">BitCrusher</div>	      
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Distortion</div>		  
+		  
+
+       <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">PingPongDelay</div>
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Freeverb</div>
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">JCReverb</div>
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Phaser</div>
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Chorus</div> 		  
+		  
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">EQ3</div>		
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Compressor</div>	
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Limiter</div>		
+				  
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Tremolo</div>
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">Vibrato</div> 
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">AutoPanner</div>
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">PitchShift</div>
+        <div class="menutoneitem" onclick="selectFX(this.innerHTML, event);">StereoWidener</div>
+ 
+
+
+
+
+
+    </div>
+ </div>	 
+	 
+	 
+</div>
+<!--  ****   END SOUND TAB **** -->
+	
+ <div   class="barman" style="width:100%;  
+	color:#ccc; background:#444; display:none;">
+	
+	ULTRASONIC cm MAX : 
+
+<span id="cmmon" style="color:#FF4400; display: inline-block;  width:60px;">80</span>
+ &nbsp;
+ <input  id="maxcm"  class="orange-slider"  type="range"
+value ="80" min="10" max="400"  step="1"
+ onchange="changecmmax(Number(this.value))" oninput="movecmmax(Number(this.value))" 
+ style="margin-bottom:12px; " /> 
+
+
+
+	<!-- <div id="calib" class="btt1 btt2" onclick="calibrate()" -->
+	<!-- style="color:#F11;"> CALIBRATE </div>  -->
+<!-- <span id="calicm" style="color:#FF4400; display: inline-block;  width:60px;">80</span> -->
+ <!-- &nbsp;	PING ms :  -->
+<!-- <span id="pingms" style="color:#FF4400; display: inline-block;  width:60px;">  </span> -->
+ 
+		
+	</div>
+
+ <!-- <div   class="barman" style="width:100%;   -->
+	<!-- color:#ccc; background:#333;">	 -->
+	<!-- DIRECT Note Change  :  -->
+	<!-- <div id="direct" class="btt1 btt2" onclick="directchange()" -->
+	<!-- style="color:#fff; background:#000;">&nbsp;OFF&nbsp;</div> 	 	 -->
+	<!-- </div> -->
+	
+	
+	 <div   class="barman" style="width:100%;  
+	color:#ccc; background:#333; display:none;">	
+	CC & BEND ms freq.  : 
+<span id="speedmon" style="color:#FF4400; display: inline-block;  width:60px;">30</span>
+ &nbsp;<input  id="speedultra"  class="orange-slider"  type="range"
+value ="30" min="5" max="250"  step="1"
+ onchange="changespeed(Number(this.value))" oninput="movespeed(Number(this.value))"  style="margin-bottom:12px; " /> 
+</div>
+	
+	
+<div   class="barman" style="width:100%;  
+	color:#ccc; background:#444; display:none;">	
+	BEND cm trig : 
+<span id="bendtrigmon" style="color:#FF4400; display: inline-block; 
+ width:45px;">3.2</span>
+<input  id="bendtrig"  class="orange-slider"  type="range"
+value ="3.2" min="0.5" max="25"  step="0.1"
+ onchange="changebendtrig(Number(this.value))" oninput="movebendtrig(Number(this.value))"  style="margin-bottom:12px; " /> 
+</div>	
+
+
+
+	<div   class="barman" style="width:100%;  
+		color:#ccc; background:#333; display:none;">	
+		BEND speed : 
+	<span id="bendspeedmon" style="color:#FF4400; display: inline-block; 
+	 width:45px;">10</span>
+	<input  id="bendspeed"  class="orange-slider"  type="range"
+	value ="10" min="1" max="50"  step="1"
+	 onchange="changebendspeed(Number(this.value))" oninput="movebendspeed(Number(this.value))"  style="margin-bottom:12px; " /> 
+	</div>	
+	
+	<div   class="barman" style="width:100%;  
+		color:#ccc; background:#444; display:none;">	
+		Virtual GEAR : </span>
+
+	<div id="vgear" class="btt1 btt2" onclick="startLux(); this.innerHTML='ON &nbsp;'; this.style.background='#FF4400';"
+	style="background:#000; color:#Fff; ">OFF</div>
+        
+
+	</div>	
+	
+	<div id="console-log-div" style="background:#222;color:#fff;padding:10px;max-height:200px;
+	overflow:auto; display:none;"></div>
+
+
+</div>
+
+ 
+<div id="cnt">
+
+  <div id="cont" style ="position:fixed; 
+  width:calc(100% - 0px); 
+  height:calc(100% - 40px); top:40px;
+  overflow-y: scroll;
+  background:none; z-index:-1;
+  overflow-x:hidden; " >
+
+  </div>
+ </div> 
+ 
+  <div class="v-bar" style="display:none; ">
+  <div class="ultra" id="ultra" 
+  style="position:fixed; bottom:2px; right:2px; width:calc(10% - 13px);
+  height:20%;   background-color:#ff3005;"> </div>
+</div>
+
+<div id="load" style ="position:fixed; top:0;left:0; width:100%;
+ height:100%; background:black; color:white;  
+ text-align:center; font-size:28px; display:none;
+ z-index:10000;">
+ &nbsp;LOAD PATCH
+ <br><br>
+	 <div id="listtrack" style="max-height:calc(100% - 80px); 
+	overflow-y:auto; color:#FF4400; font-size:24px; "
+	 >
+	 
+	 
+	 </div>
+	 
+	 <div style="position: fixed; right:6px; top:3px;
+	 background:#FF4400; color:white; padding:4px;"
+	 onclick="document.getElementById('load').style.display='none';"
+	 > X </div>
+
+ 
+ </div>
+ 
+ <div id="portrait" style="position:fixed; top:0;left:0; 
+	 width:100%;
+	 height:100%; 
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center; color:#FF4400; background:black;
+	  font-size:32px;" >
+    <p>Please switch to landscape mode 
+	<br>for a better experience.</p>
+  </div>
+  
+ <div id="fake" style="position:fixed; top:0;left:0; 
+	 width:100%;
+	 height:100%; 
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+ background: linear-gradient(to bottom, #FF4400, #AAAAAA);
+     z-index:8000;
+      text-align: center; color:#FF4400;  
+	  font-size:32px;" 
+ onclick="playvgear(this.clientHeight, event.clientY)">
+	  
+  <button   style="float: right; font-size: 25px; z-index: 4; color:#FF4400; 
+  border:solid #FF7700 2px; margin:5px;" onclick="flipvgear(0);">X</button>
+ 
+  </div>  
+  
+ 
+
+
+<div id="splashmidi" style ="position:fixed; top:0;left:0; width:100%;
+ height:100%; background:black; color:orange;  
+ align-items: center; display:none;">
+
+<div style="text-align:center; margin:auto; 
+ color:white; background:#FF4400; font-size:32px;
+ border-radius:12px; padding:6px;" 
+ class="bt1 bt2"
+ onclick="authmidi()"
+ onmouseover="this.style.color='transparent'; this.style.background='linear-gradient(to right, gold, red)'; this.style.webkitBackgroundClip='text'; this.background='#ff4400';"
+ onmouseout="this.style.color='white'; this.style.background='#FF4400'; this.style.webkitBackgroundClip='border-box'" > 
+ Authorize MIDI <br>to use the App
+</div>
+
+</div>
+
+
+
+<div id="splashsound" style ="position:fixed; top:0;left:0; width:100%;
+ height:100%; background:#010101; color:orange;   z-index:100000;
+ align-items: center; display:block;">
+
+	<div id="spatch"style="text-align:center; margin:auto; 
+	 color:white; background:#FF4400; font-size:32px;
+	 border-radius:12px; padding:6px;" 
+	 class="bt1 bt2"
+ 
+	onclick="startsound();"  
+ onmouseover="this.style.color='transparent'; this.style.background='linear-gradient(to right, gold, red)'; this.style.webkitBackgroundClip='text'; this.background='#ff4400';"
+ onmouseout="this.style.color='white'; this.style.background='#FF4400'; this.style.webkitBackgroundClip='border-box'" > 
+	 Authorize SOUNDS <br>in the browser
+	</div>
+
+</div>
+
+
+<!-- <div id="view" style ="position:fixed; bottom:0;left:0; width:100%; -->
+ <!-- height:32px; background:black; color:#888;   -->
+ <!-- align-items: center; display:none;  "> -->
+<div id="view" style="position: fixed; bottom: 0; left: 0; width: 100%; 
+height:64px; margin-bottom:5px; 
+ background: black; color: #888; display: none; align-items: center;">   
+   <span class="btt1" id="viewpos" style="color:#FF4400; 
+   padding-left:6px; padding-right:6px;" >1</span>
+ <span id="lblcc0" onclick="setccfast(0);" > filter:</span><span  onclick="setccfast(0);"  style="color:#FF4400;" id="viewcc0">-</span> 
+ <span id="lblcc1" onclick="setccfast(1);"> start:</span><span  onclick="setccfast(1);"  style="color:#FF4400;" id="viewcc1">-</span>
+ <span id="lblcc2" onclick="setccfast(2);"> length:</span><span  onclick="setccfast(2);" style="color:#FF4400;"  id="viewcc2">-</span> 
+ <span id="lblcc3" onclick="setccfast(3);"> pitch:</span><span  onclick="setccfast(3);"  style="color:#FF4400;" id="viewcc3">-</span> 
+  <span style="display:none;"> <span > bend:</span><span  style="color:#FF4400; " id="look">000</span> </span> 
+ &nbsp;
+ 
+ 
+ 
+  <br><span class="btt1" onclick="random();"
+  style="color:#FF4400;"> RANDOM </span> &nbsp; 
+  
+    <span  id="numset"
+  style="color:#FFFFFF; border:solid #FF4400 2px; border-radius:3px; padding-right:4px; 
+  padding-left:4px;"> 1 </span> 
+ 
+  &nbsp;&nbsp;
+<span style="position:absolute; font-weight:bold; margin-top:4px;">
+<span  style="background:#FF4400; color:white; font-size:20px;border-radius:5px 0px 0px 5px;" id="viewpitch"
+onclick="preciseset(-1);" ondblclick="preciseset(-10);">&nbsp;- </span>
+<span  style="background:#FF4400; color:white;font-size:16px; border-radius:0px;" id="viewpitch"
+onclick="preciseset(-0.1);">&nbsp;- </span>  
+<span  style="background:#FF4400; color:white; font-size:12px;border-radius:0px  3px 3px 0px" id="viewpitch"
+onclick="preciseset(-0.01);">&nbsp;-&nbsp;</span>  
+<span  style="background:#FF4400; color:white; font-size:12px;border-radius:3px; 0px 0px 3px;" id="viewpitch"
+onclick="preciseset(0.01);">&nbsp;+ </span>
+<span  style="background:#FF4400; color:white;font-size:16px;  border-radius:0px;" id="viewpitch"
+onclick="preciseset(0.1);">&nbsp;+ </span>  
+<span  style="background:#FF4400; color:white;font-size:20px;border-radius:0px 5px 5px 0px;" id="viewpitch"
+onclick="preciseset(1);"   ondblclick="preciseset(10);">&nbsp;+&nbsp;</span>  
+</span>
+
+ </div>
+ 
+ 
+ <div id="lux" style="position:fixed; background:rgba(25,25,20,0.99); top:0; left:0; display:none;
+ z-index:30000; width:100%; height:100%; padding:12px; font-size:32px; color:#8882ED">
+ 
+
+<div id="bar2" style="position:absolute; bottom:0px; left:50%; width:20%; background:#FF4400; display:none;"></div>
+ 
+ LUX : 
+<span id="luz">00</span> &nbsp;  <span  id="stlux" class="btt1" >start video</span>
+ &nbsp;  <span onclick="setPlay()" class="btt1" id="fliplay" >play</span></span>
+<br>
+V-sensibility: <input  id="maxcm"  class="orange-slider"  type="range"
+value ="25" min="0" max="40"  step="1"
+ onchange="changeSensi(Number(this.value))"  
+ oninput="document.getElementById('sensi').innerHTML = this.value;"   
+ style="margin-bottom:12px; " />  <span id="sensi">25</span>
+<br>
+H-sensibility: <input  id="maxcm"  class="orange-slider"  type="range"
+value ="25" min="0" max="40"  step="1"
+ onchange="changeSensiH(Number(this.value))"  
+ oninput="document.getElementById('sensih').innerHTML = this.value;"   
+ style="margin-bottom:12px; " />  <span id="sensih">25</span>
+<br> 
+ 
+    <form>
+        <label>
+            Left  Hand
+            <input type="radio" name="hand" value="left" checked onchange="selectHand(this.value)" >			
+        </label>
+        <label>
+            <input type="radio" name="hand" value="right"  onchange="selectHand(this.value)" >
+            Right Hand 
+        </label>  
+
+&nbsp;       <label>
+			OFF 
+            <input type="radio" name="hand" value="off"  onchange="selectHand(this.value)" >
+            
+        </label>  
+		
+    </form>
+ 
+<br> 
+ 
+<canvas id="canvax"  style="wposition:fixed; left:0; top:0; width:100%; height:100%; display:none; z-index:999999;"></canvas>
+<div id="lum"></div>
+ <br> <button onclick="learn(7);">LEARN 5 sec</button>  <button onclick="learn(2000);">LEARN 1/2H</button>
+<br><div id="learn" style="font-size:32px;"></div>
+ 
+   <video class="videobox canvasbox" width=360 height=480 autoplay="autoplay" id="myvideo"
+   style="right:0; bottom:0; "></video>
+ <span style="position:fixed; right:12px; top:12px;" onclick="document.getElementById('lux').style.display='none'">X</span>
+
+  <div class="mb10">
+    <button onclick="" id="trackbutton" class="" type="button">
+      Toggle Video
+    </button>
+    <div id="updatenote" class="updatenote mt10"> loading model ..</div>
+  </div>
+
+
+</div>
+
+
+ <div id="savepage"  
+	style="position:fixed; display:none; z-index:15; top:0; left:0;
+	  color:white;
+	  width:100%; height:100%; background:black;">
+		<button   style="float: right; font-size: 25px; z-index: 4; color:#FF4400; 
+	  border:solid #FF7700 2px; margin:5px;" onclick="closeListTracks()">X</button>	  
+  <br>
+  <div id="tracklist" style="height:100%; overflow-y:auto;  " > </div>
+ </div>
+ 
+ 
+			
+ <div id="savesound"  
+	style="position:fixed; display:none; z-index:15; top:0; left:0;
+	  color:white;
+	  width:100%; height:100%; background:black;">
+		<button   style="float: right; font-size: 25px; z-index: 4; color:#FF4400; 
+	  border:solid #FF7700 2px; margin:5px;" onclick="closeListSounds()">X</button>	  
+   <br>
+   <div id="soundlist" style="height:100%; overflow-y:auto;  " > </div>
+ </div>
+ 
+ 
+ 			
+ <div id="samplepage"  
+	style="position:fixed; display:none; z-index:15; top:0; left:0;
+	  color:white;
+	  width:100%; height:100%; background:black;">
+		<button   style="float: right; font-size: 25px; z-index: 4; color:#FF4400; 
+	  border:solid #FF7700 2px; margin:5px;" onclick="closeSamplePage()">X</button>	  
+   <br>	  
+  <div   class="buttsample" id="uploadSampleBtn"  >Upload Sample</div>	  
+   <br>
+   <div id="samplelist" style="height:100%; overflow-y:auto;  " > </div>
+ </div>
+ 
+  
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/handtrackjs/dist/handtrack.min.js"> </script> -->
+
+<!-- <div id="consoleOutput"></div> -->
+  
+  <!-- <script src="socket4_3_2.js"></script> -->
+  
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.min.js"></script>   -->
+
+<!-- <script src='https://cwilso.github.io/WebMIDIAPIShim/build/WebMIDIAPI.min.js'></script> -->
+
+	<script src="tone_15_04.js"></script> 
+	
+	<script src="ultrasound.js"></script> 
+
+
+ <script  src="ultra.js"></script>	
+   <!-- <script src=""https://cdn.jsdelivr.net/npm/tone@latest""></script> -->
+
+</body>
+</html>

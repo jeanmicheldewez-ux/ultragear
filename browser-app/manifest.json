@@ -1,0 +1,10 @@
+{
+  "lang": "en",
+  "name": "Midistream Ultragear",
+  "short_name": "ULTRAGEAR",
+  "description": "UG-1 controller",
+  "start_url": "./",
+  "background_color": "#ffffff",
+  "theme_color": "#FF4400",
+  "display": "standalone"
+}
