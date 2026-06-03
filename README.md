@@ -20,8 +20,6 @@ This project has been live-tested in about 10 gigs.
 
 Photos will be added in `assets/photos/`.
 
-<img width="982" height="656" alt="sh-ultragear" src="https://github.com/user-attachments/assets/2b267336-bc32-4a5e-811a-f408a8854439" />
-
 ## Firmware Features
 
 - USB MIDI output from the ESP32.
@@ -46,6 +44,8 @@ The reusable sound engine direction for this project is `midi2sound`, which is m
 https://jeanmicheldewez-ux.github.io/midi2sound/
 
 This repository keeps the Ultragear controller app separate from the reusable `midi2sound` internals. Do not copy the full `midi2sound` repo into this project.
+
+<img width="982" height="656" alt="sh-ultragear" src="https://github.com/user-attachments/assets/2b267336-bc32-4a5e-811a-f408a8854439" />
 
 ## Project Structure
 
