@@ -20,6 +20,8 @@ This project has been live-tested in about 10 gigs.
 
 Photos will be added in `assets/photos/`.
 
+<img width="982" height="656" alt="sh-ultragear" src="https://github.com/user-attachments/assets/2b267336-bc32-4a5e-811a-f408a8854439" />
+
 ## Firmware Features
 
 - USB MIDI output from the ESP32.
