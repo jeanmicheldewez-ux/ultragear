@@ -21,7 +21,7 @@ Use this before publishing the repository.
 
 ## Firmware Test
 
-- [ ] Build `firmware/ultra_box_45.ino`.
+- [ ] Build `firmware/ultragear_usb_midi/ultragear_usb_midi.ino`.
 - [ ] Flash to the ESP32 target board.
 - [ ] Confirm USB MIDI device appears.
 - [ ] Confirm first-boot EEPROM initialization.
@@ -43,10 +43,11 @@ Use this before publishing the repository.
 
 ## Demo Instructions
 
-- [ ] Add one short video or audio demo.
-- [ ] Add at least one photo of the finished controller.
+- [x] Add one short video or audio demo.
+- [x] Add at least one photo of the finished controller.
 - [ ] Add one wiring or signal-flow diagram.
-- [ ] Document exact synth/browser setup used in the demo.
+- [x] Document exact synth/browser setup used in the demo.
+- [x] Add Arduino IDE settings screenshot.
 
 ## GitHub Pages
 

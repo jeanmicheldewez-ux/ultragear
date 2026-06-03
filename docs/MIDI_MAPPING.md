@@ -1,6 +1,6 @@
 # MIDI Mapping
 
-Ultragear maps hand distance and touch buttons to MIDI notes, CC messages, pitch bend, program change, and preset-edit messages.
+Ultragear maps hand distance and touch buttons to MIDI notes, CC messages, pitch bend, program change, and preset-edit messages. The public firmware focuses on USB MIDI for clarity and reliability.
 
 ## 4 MIDI Channels And Channel Buttons
 
@@ -37,8 +37,8 @@ Each preset stores CC numbers and CC min/max ranges.
 
 Current firmware pins:
 
-- Trigger: GPIO `47`
-- Echo: GPIO `45`
+- Trigger: GPIO `15`
+- Echo: GPIO `17`
 
 The sensor distance is read with `pulseIn()` and converted to centimeters. The active range is capped around `45 cm`. Distance is mapped to:
 
@@ -98,3 +98,5 @@ Observed flow:
 - Other MIDI goes to `midiSound()` and optional route output.
 
 Use Chrome or Edge on HTTPS or localhost for the most reliable Web MIDI behavior.
+
+Older WiFi/OTA experiments are not part of the public MIDI mapping. No active firmware WiFi MIDI path was found during the public-release audit.

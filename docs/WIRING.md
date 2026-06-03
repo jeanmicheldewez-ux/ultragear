@@ -1,13 +1,26 @@
 # Wiring
 
-This file records the wiring that can be inferred from the current firmware. Confirm against the physical instrument before publishing a final build guide.
+This file records the wiring confirmed for the current portfolio prototype plus pin mappings detected from the working firmware.
+
+The goal for now is portfolio documentation, not a complete step-by-step public build guide.
+
+## Hardware Summary
+
+- Controller board: ESP32-S3 Espressif WROOM module.
+- Distance sensor: HC-SR04 ultrasonic sensor.
+- Sensor power: powered from the ESP32 board `5V` pin.
+- Sensor trigger: direct ESP32 GPIO connection.
+- Sensor echo: direct ESP32 GPIO connection in the current prototype.
+- Buttons: conductive PLA printed buttons connected directly to ESP32 touch inputs.
+- LEDs: WS2812/NeoPixel, ring of 8 LEDs plus 1 central LED, powered from `5V`.
+- Enclosure: 3D printed.
 
 ## Current Firmware Pin Map
 
 | Function | Firmware Pin |
 | --- | --- |
-| Ultrasonic trigger | GPIO 47 |
-| Ultrasonic echo | GPIO 45 |
+| Ultrasonic trigger | GPIO 15 |
+| Ultrasonic echo | GPIO 17 |
 | NeoPixel/FastLED data | GPIO 21 |
 | LED clock define | GPIO 13, currently defined but NeoPixel mode uses data pin |
 | Touch 0 | GPIO 9 |
@@ -51,7 +64,15 @@ digitalWrite(trigPin, LOW);
 duration = pulseIn(echoPin, HIGH, 6000);
 ```
 
-Add the final sensor model, power voltage, ground, trigger, and echo wiring once confirmed.
+Current prototype wiring:
+
+- HC-SR04 `VCC` to board `5V`.
+- HC-SR04 `GND` to board `GND`.
+- HC-SR04 `TRIG` to GPIO `15`.
+- HC-SR04 `ECHO` to GPIO `17`.
+- No echo level shifter is currently used.
+
+Note: many HC-SR04 modules output a 5V echo when powered from 5V, while ESP32 GPIOs are normally 3.3V logic. The current instrument works this way, but a reproducible public build guide should verify the exact sensor module or add a level shifter/resistor divider recommendation.
 
 ## Placeholder Diagrams
 
@@ -63,14 +84,22 @@ Add diagrams to:
 
 Add photos to:
 
-- `assets/photos/front.jpg`
+- `assets/photos/ultragear.jpg`
 - `assets/photos/internal-wiring.jpg`
 - `assets/photos/live-performance.jpg`
+- `assets/photos/arduino_ide_settings.png`
+
+Current media:
+
+- `assets/video/Video-live-demo.mp4`
+- `assets/photos/arduino_ide_settings.png`
+- `assets/photos/ultragear.jpg`
+
+The live demo video was captured at Souplex. In that performance, Ultragear sends MIDI to an Axoloti DSP board.
 
 ## Notes Before Final Public Build Guide
 
-- Confirm ESP32 board variant.
-- Confirm whether any echo level shifting is required for the ultrasonic sensor.
-- Confirm conductive PLA button connection method and any pull-up/pull-down behavior.
-- Confirm LED count and physical LED order.
+- Decide whether to recommend echo level shifting for a public build guide.
+- Add photos of the conductive PLA button connection method.
+- Confirm physical LED order in a diagram.
 - Confirm USB MIDI host/synth connection examples.

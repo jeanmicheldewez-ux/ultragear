@@ -8,20 +8,29 @@ This project has been live-tested in about 10 gigs.
 
 ## Hardware Overview
 
-- ESP32-based controller, tested with TinyUSB-style USB MIDI device naming.
-- Ultrasonic distance sensor for hand-distance gesture control.
+- ESP32-S3 Espressif WROOM module, tested with USB MIDI.
+- HC-SR04 ultrasonic distance sensor for hand-distance gesture control.
 - 3D-printed enclosure.
-- Conductive PLA printed touch buttons.
+- Conductive PLA printed touch buttons connected directly to ESP32 touch inputs.
 - 4 channel buttons for using and selecting 4 MIDI channels.
 - 4 CC buttons for sending mapped MIDI CC values.
 - Next and previous preset buttons.
 - Additional buttons reserved for features such as looper control.
-- NeoPixel/FastLED LED feedback.
+- WS2812/NeoPixel LED feedback: ring of 8 LEDs plus 1 central LED, powered from 5V.
 
-Photos will be added in `assets/photos/`.
+Hardware photos and diagrams will be added in `assets/photos/` and `assets/diagrams/`.
+
+## Media
+
+- [Controller photo](assets/photos/ultragear.jpg)
+- [Live demo video](assets/video/Video-live-demo.mp4)
+- [Arduino IDE settings screenshot](assets/photos/arduino_ide_settings.png)
+
+The demo video is a live performance capture at Souplex, with Ultragear sending MIDI to an Axoloti DSP board.
 
 ## Firmware Features
 
+- Public firmware focuses on USB MIDI for clarity and reliability.
 - USB MIDI output from the ESP32.
 - Standalone MIDI synth control.
 - Browser app and Web MIDI control.
@@ -50,7 +59,7 @@ This repository keeps the Ultragear controller app separate from the reusable `m
 ## Project Structure
 
 ```text
-firmware/        ESP32 firmware
+firmware/        ESP32 firmware, including public USB MIDI and preserved legacy sketch
 browser-app/     Static Web MIDI browser app
 docs/            Project documentation
 assets/photos/   Photo placeholders
@@ -59,14 +68,16 @@ assets/diagrams/ Wiring and signal-flow placeholders
 
 ## Flash Firmware
 
-1. Open `firmware/ultra_box_45.ino` in Arduino IDE or an ESP32-compatible Arduino workflow.
-2. Install/select an ESP32 board package with USB MIDI support for the target board.
-3. Install required Arduino libraries: FastLED, ESP32 USB/USBMIDI support, EEPROM, WiFi, and HTTPUpdate.
+1. Open `firmware/ultragear_usb_midi/ultragear_usb_midi.ino` in Arduino IDE or an ESP32-compatible Arduino workflow.
+2. Install/select the Espressif ESP32 board package and use the ESP32-S3 WROOM board settings shown in `assets/photos/arduino_ide_settings.png`.
+3. Install required Arduino libraries: FastLED, ESP32 USB/USBMIDI support, and EEPROM.
 4. Connect the ESP32 by USB.
 5. Select the correct board and port.
 6. Build and upload.
 
-OTA update code exists in the firmware, but WiFi credentials are intentionally blank in this public release. Configure them locally only if you use OTA.
+The public sketch is based on the known-good `UG_4X_45_mic_in.ino` firmware and keeps that sketch's USB MIDI, ultrasonic, touch, preset, and serial-note-input behavior.
+
+Preserved legacy sketches still contain older WiFi/OTA update experiments for reference. Those experiments are not part of the public demo firmware.
 
 ## Run Browser App
 
@@ -107,6 +118,7 @@ Browser/midi2sound:
 
 - [Current state](docs/CURRENT_STATE.md)
 - [Firmware setup](docs/FIRMWARE_SETUP.md)
+- [Firmware WiFi notes](docs/FIRMWARE_WIFI_NOTES.md)
 - [Preset system](docs/PRESET_SYSTEM.md)
 - [MIDI mapping](docs/MIDI_MAPPING.md)
 - [Wiring](docs/WIRING.md)
@@ -123,10 +135,12 @@ Browser/midi2sound:
 - Conductive PLA button interaction in a 3D-printed enclosure.
 - Browser Web MIDI integration.
 - Separation path between controller-specific UI and a reusable sound engine.
+- Practical ICT/business-analysis value: turning a physical prototype into a documented, testable, public project with clear requirements, architecture, release notes, and risk tracking.
 
-## Photo And Wiring Placeholders
+## Photos And Diagrams
 
-- Add live instrument photos to `assets/photos/`.
+- Current controller photo: `assets/photos/ultragear.jpg`.
+- Current Arduino IDE settings screenshot: `assets/photos/arduino_ide_settings.png`.
 - Add enclosure photos to `assets/photos/`.
 - Add wiring diagrams to `assets/diagrams/`.
 - Add MIDI flow diagrams to `assets/diagrams/`.
@@ -137,6 +151,6 @@ Browser/midi2sound:
 - Document exact ESP32 board variant and pinout validation.
 - Replace controller-specific browser sound code with a small `midi2sound` adapter where safe.
 - Add a clean preset import/export format for the browser app.
-- Improve firmware configuration for OTA credentials without editing public source.
+- Keep OTA/network experiments separate from the public USB MIDI firmware.
 - Document looper controls once the hardware mapping is finalized.
 - Add short performance demo instructions and media links.

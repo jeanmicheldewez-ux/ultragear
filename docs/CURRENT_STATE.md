@@ -10,7 +10,11 @@ This document records the repository state after the public-release preparation 
 ├── README.md
 ├── .gitignore
 ├── firmware/
-│   └── ultra_box_45.ino
+│   ├── legacy/
+│   │   └── UG_4X_45_mic_in/
+│   │       └── UG_4X_45_mic_in.ino
+│   └── ultragear_usb_midi/
+│       └── ultragear_usb_midi.ino
 ├── browser-app/
 │   ├── index.html
 │   ├── ultra.js
@@ -37,7 +41,9 @@ This document records the repository state after the public-release preparation 
 
 ## ESP32 Firmware Entry Point
 
-The firmware entry point is `firmware/ultra_box_45.ino`.
+The public firmware entry point is `firmware/ultragear_usb_midi/ultragear_usb_midi.ino`.
+
+The public sketch was rebuilt from the known-good `UG_4X_45_mic_in.ino` source. The preserved legacy firmware sketch is `firmware/legacy/UG_4X_45_mic_in/UG_4X_45_mic_in.ino`. It keeps older WiFi/OTA update experiments for reference with credentials redacted.
 
 Important functions:
 
@@ -62,7 +68,14 @@ It loads:
 
 ## Firmware Libraries Used
 
-Observed includes:
+Observed includes in the public USB MIDI sketch:
+
+- `FastLED.h`
+- `USB.h`
+- `USBMIDI.h`
+- `EEPROM.h`
+
+Additional includes in the preserved legacy sketch:
 
 - `WiFi.h`
 - `HTTPUpdate.h`
@@ -113,7 +126,7 @@ Preset sync:
 
 ## Preset Storage System
 
-The firmware initializes EEPROM with marker byte `86` at address `0`.
+The public `ultragear_usb_midi.ino` sketch initializes EEPROM with marker byte `87` at address `0`.
 
 Observed layout:
 
@@ -128,9 +141,31 @@ Observed layout:
 
 There are 16 banks/presets indexed `0` to `15`.
 
+## Hardware State
+
+Confirmed prototype hardware:
+
+- ESP32-S3 Espressif WROOM module.
+- HC-SR04 ultrasonic sensor powered from board `5V`.
+- Ultrasonic trigger on GPIO `15`.
+- Ultrasonic echo on GPIO `17`.
+- No echo level shifter in the current prototype.
+- Conductive PLA buttons connected directly to ESP32 touch inputs.
+- WS2812/NeoPixel LED feedback: 8-LED ring plus 1 central LED, powered from `5V`.
+- 3D-printed enclosure.
+
+Existing assets:
+
+- `assets/video/Video-live-demo.mp4`
+- `assets/photos/arduino_ide_settings.png`
+- `assets/photos/ultragear.jpg`
+
+The video is a live performance capture at Souplex, with Ultragear sending MIDI to an Axoloti DSP board.
+
 ## What Can Be Safely Published
 
-- Firmware source after removing hard-coded WiFi credentials.
+- Public USB MIDI firmware source in `firmware/ultragear_usb_midi/`.
+- Preserved legacy firmware source, with WiFi credentials redacted.
 - Static browser app source.
 - Local copies of Tone.js and NexusUI if their licenses are acceptable for the final repository.
 - The default `Amen-break.wav` sample only if its licensing/ownership is confirmed.
@@ -139,7 +174,7 @@ There are 16 banks/presets indexed `0` to `15`.
 ## What Should Be Cleaned Later
 
 - Confirm license status for `Amen-break.wav`, `tone_15_04.js`, and `nexusUI.js`.
-- Replace or isolate OTA update configuration so WiFi and update URLs are locally configurable.
+- Keep OTA update experiments separate from the public USB MIDI firmware.
 - Document the exact ESP32 board and pin mapping with a wiring diagram.
 - Remove dead/commented network/socket code from the browser app in a later cleanup pass.
 - Split controller UI from sound-engine logic and integrate through a small `midi2sound` adapter.

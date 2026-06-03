@@ -1,6 +1,6 @@
 # Preset System
 
-Ultragear stores 16 presets in ESP32 EEPROM/flash through the Arduino `EEPROM` API.
+Ultragear stores 16 presets in ESP32 EEPROM/flash through the Arduino `EEPROM` API. The public USB MIDI firmware keeps the same preset system as the preserved legacy sketch.
 
 ## Preset Count
 
@@ -23,7 +23,7 @@ Each preset stores:
 
 Observed from `initEEprom()`, `loadBank()`, and `saveBank()`:
 
-- `0`: storage marker, value `86`.
+- `0`: storage marker. The public `ultragear_usb_midi.ino` sketch uses value `87`.
 - `1`: last selected bank.
 - `8 + bank`: BPM low 7 bits.
 - `24 + bank`: BPM high bits.
@@ -52,6 +52,8 @@ The current preset sync is a fake SysEx system over normal MIDI messages:
 - Browser sends edits back as arrays like `[143, parameterId, value]`.
 - Firmware receives those messages in `fakeSysex()` and updates in-memory preset values.
 - Browser can request save by sending parameter `24`.
+
+This sync path is USB MIDI-focused in the public firmware. Older WiFi/OTA experiments are not required for preset storage or preset sync.
 
 ## Future Extension Possibilities
 
